@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>Cart Page</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="content">
+		<div class="header">
+			<h1>Shopping Cart</h1>
+		</div>
+	<div id="body">
+		<table width="100%">
+			<tr>
+				<th>Product Name</th>
+				<th>Unit Quantity</th>
+				<th>Unit Price</th>
+				<th>Amount</th>
+				<th>Total Price</th>
+			</tr>
+			<tr>
+				<td colspan="5" align="right">Total Price for shopping: $</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>
+					<form action="cart.php">
+						<input type="submit" name="checkout" value="Checkout">
+					</form>
+				</td>
+				<td>
+					<form>
+						<input type="submit" name="clear" value="Clear">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</body>
+</html>
