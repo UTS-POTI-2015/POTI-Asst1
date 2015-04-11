@@ -4,6 +4,7 @@
 body{
 	font-family: Verdana, Times, serif;
     font-size: 16px;
+    background-color: #ffffff;
     color: #494949;
     margin: 0;
     padding: 0;
@@ -44,11 +45,12 @@ h1{
 }
 
 #body{
-	background-color: #FDFFDF;
+	background-color: #ffffff;
 	height: 2px;
 	margin-bottom: 20px;
 	padding: 20px 20px 10px 20px;
 }
+
 
 
 /*-----------For table-----------*/
