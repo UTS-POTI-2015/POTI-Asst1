@@ -23,43 +23,19 @@
 
             $num_rows = mysql_num_rows($result);
             if ($num_rows > 0 ) {
-                print "<table border='0' cellspacing='0' cellpadding='5'>";
+                print "<table border='1' cellspacing='0' cellpadding='5'>";
                 while ( $a_row = mysql_fetch_assoc($result) ) {
                      print "<tr>\n";
-                     print "<td>"Product Name: "</td>";
                      print "<td>".$a_row['product_name']."</td>";
-                     print "</tr>";
-                     print "<tr>\n";
-                     print "<td>"Unit Price: "</td>";
                      print "<td>".$a_row['unit_price']."</td>";
-                     print "</tr>";
-                     print "<tr>\n";
-                     print "<td>"Unit Quantity: "</td>";
                      print "<td>".$a_row['unit_quantity']."</td>";
-                     print "</tr>";
-                     print "<tr>\n";
-                     print "<td>"In Stock: "</td>";
                      print "<td>".$a_row['in_stock']."</td>";
                      print "</tr>";
-                     print "<tr>\n";
                 }
                 print "</table>";
             }
             mysql_close($link);
             ?>
-
-            <?php
-
-            if (isset($_POST['submit']))
-            {
-            $result=$_POST['num1']*$_POST['num2'];
-            }
-            ?>
-
-            <form action="#" method="post">
-                Amount: <input type="number" name="amount">
-                <input type="submit" name="Add">
-                </form>
     </div>
 <div class="body">
 
