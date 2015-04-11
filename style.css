@@ -4,10 +4,11 @@
 body{
 	font-family: Verdana, Times, serif;
     font-size: 16px;
-    background-color: #ffffff;
     color: #494949;
     margin: 0;
     padding: 0;
+    background-image: url("img/bottom_half.png");
+    background-repeat: repeat;
 }
 
 /*----for heading------*/
@@ -43,12 +44,11 @@ h1{
 }
 
 #body{
-	background-color: #ffffff;
+	background-color: #FDFFDF;
 	height: 2px;
 	margin-bottom: 20px;
 	padding: 20px 20px 10px 20px;
 }
-
 
 
 /*-----------For table-----------*/

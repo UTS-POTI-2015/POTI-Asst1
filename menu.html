@@ -2,11 +2,37 @@
 
 <head>
 	<title>Menu Page</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="FDFFDF">
+<body bgcolor="FDFFDF" background-image="img/bottom_half.png">
 
-	<img src="img/top_half.png" alt="Available Stocks" style="width: 100%; height: 30%;" align = "middle">
-	<img src="img/home_health.png" alt="" style="width: 100%; height: 50%;" align = "middle">
+	<img src="img/top_half.png" alt="Available Stocks" align = "middle" usemap="#categorymap">
 
+	<map id="categorymap" name="categorymap" >
+	<area shape="rect" coords="9,141,88,181" 	 onmouseover="loadSubcategoryImage('frozen_food')" 	alt="frozen_food">
+	<area shape="rect" coords="104,141,183,180"  onmouseover="loadSubcategoryImage('fresh_food')" 	alt="fresh_food">
+	<area shape="rect" coords="199,140,278,180"  onmouseover="loadSubcategoryImage('beverages')" 	alt="beverages">
+	<area shape="rect" coords="294,140,375,179"  onmouseover="loadSubcategoryImage('home_health')" 	alt="home_health">
+	<area shape="rect" coords="388,139,469,179"  onmouseover="loadSubcategoryImage('pet_food')" 	alt="pet_food">
+	</map>
+
+	<div id="subcategoryImage">	</div>
+
+<script type="text/javascript">
+function loadSubcategoryImage(categoryId){
+	var parent = document.getElementById("subcategoryImage")
+	var child = parent.firstChild;
+	if (child != null) {
+		parent.removeChild(child);		
+	}
+
+	var pic = document.createElement("img");
+	pic.setAttribute("id", categoryId);
+	pic.setAttribute("src", "img/" + categoryId + ".png");
+	pic.setAttribute("alt", categoryId);
+	pic.setAttribute("align", "middle");
+	parent.appendChild(pic);
+}
+</script>
 </body>
 </html>
