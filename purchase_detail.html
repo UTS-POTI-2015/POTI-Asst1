@@ -1,0 +1,104 @@
+	<!--for after click on checkout button-->
+	
+	<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+
+	<body>
+	<div class="content">
+		<div id="header">
+			<h1>Purchasing Form</h1>
+		</div>
+		<div id="body">
+			<p>Please enter your purchasing details in the below purchasing form.
+			<br>Thank you!</p>
+			
+						
+			<form name="purchase">
+			<fieldset>
+			<!--for customer to input their purchasing information-->
+				<table>
+				<tr>
+					<td>
+						<label>Name</label>
+					</td>
+					<td>
+						<input name="name" type="text"/> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Address</label>
+					</td>
+					<td>
+						<input name="address" type="text"/> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Suburb</label>
+						</td>
+					<td>
+						<input name="suburb" type="text" /> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>State</label>
+						</td>
+					<td>
+						<input name="state"  type="text"> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Country</label>
+					</td>
+					<td>
+						<input name="country"  type="text"> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Email</label>
+					</td>
+					<td>
+						<input name="email" type="text" /> 
+						<font color="#ff1919">*</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<input name="purchase" type="submit" value="Purchase">
+					</td>
+				</tr>
+				</table>
+			</fieldset>
+			</form>
+			<h3>The selected products: </h3>
+	
+			
+			<!---similar to the cart form-->
+		<table width="100%">
+		<tr>
+			<th>Product Name </th>
+			<th>Unit Quantity </th>
+			<th>Unit Price </th>
+			<th>Amount </th>
+			<th>Total Price </th>
+		</tr>
+		<tr>
+			<td colspan="5" align="right">Total Price: $</td>
+		</tr>	
+		</div>
+	</div>
+	</body>
+	</html>
