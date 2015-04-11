@@ -8,8 +8,6 @@ body{
     color: #494949;
     margin: 0;
     padding: 0;
-    background-image: url("img/bottom_half.png");
-    background-repeat: repeat;
 }
 
 /*----for heading------*/
@@ -17,6 +15,25 @@ h1{
 	font-family: Verdana, Times, serif;
     font-size: 24px;
     color: #000000;
+}
+
+/*----for map link------*/
+a:link
+{
+    color: #67daf7;
+}
+a:visited
+{
+    color: #67daf7;
+}
+a:hover
+{
+    color: #67daf7;
+}
+a:active
+{
+    color: #67daf7;
+    
 }
 
 /*-------for main content---------*/
@@ -51,7 +68,13 @@ h1{
 	padding: 20px 20px 10px 20px;
 }
 
+#categorymap{
+	
+}
 
+#subcategoryImage{
+
+}
 
 /*-----------For table-----------*/
 table{
