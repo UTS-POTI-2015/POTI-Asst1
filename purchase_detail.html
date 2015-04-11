@@ -1,104 +1,115 @@
 	<!--for after click on checkout button-->
-	
-	<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
+<!DOCTYPE HTML> 
+<html>
+<head>
+<style>
+.error {color: #FF0000;}
+</style>
+</head>
+<body> 
 
-	<body>
-	<div class="content">
-		<div id="header">
-			<h1>Purchasing Form</h1>
-		</div>
-		<div id="body">
-			<p>Please enter your purchasing details in the below purchasing form.
-			<br>Thank you!</p>
-			
-						
-			<form name="purchase">
-			<fieldset>
-			<!--for customer to input their purchasing information-->
-				<table>
-				<tr>
-					<td>
-						<label>Name</label>
-					</td>
-					<td>
-						<input name="name" type="text"/> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Address</label>
-					</td>
-					<td>
-						<input name="address" type="text"/> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Suburb</label>
-						</td>
-					<td>
-						<input name="suburb" type="text" /> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>State</label>
-						</td>
-					<td>
-						<input name="state"  type="text"> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Country</label>
-					</td>
-					<td>
-						<input name="country"  type="text"> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Email</label>
-					</td>
-					<td>
-						<input name="email" type="text" /> 
-						<font color="#ff1919">*</font>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					</td>
-					<td>
-						<input name="purchase" type="submit" value="Purchase">
-					</td>
-				</tr>
-				</table>
-			</fieldset>
-			</form>
-			<h3>The selected products: </h3>
-	
-			
-			<!---similar to the cart form-->
-		<table width="100%">
-		<tr>
-			<th>Product Name </th>
-			<th>Unit Quantity </th>
-			<th>Unit Price </th>
-			<th>Amount </th>
-			<th>Total Price </th>
-		</tr>
-		<tr>
-			<td colspan="5" align="right">Total Price: $</td>
-		</tr>	
-		</div>
-	</div>
-	</body>
-	</html>
+<?php
+// define variables and set to empty values
+$nameErr = $addressErr = $suburbErr = $stateErr = $countryErr = $emailErr = "";
+$name = $address = $suburb = $state = $country = $email = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (empty($_POST["name"])) {
+     $nameErr = "Name is required";
+   } else {
+     $name = test_input($_POST["name"]);
+     // check if name only contains letters and whitespace
+     if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+       $nameErr = "Only letters and white space allowed"; 
+     }
+   }
+   
+   
+     
+   if (empty($_POST["address"])) {
+     $addressErr = "address is required";
+   } else {
+     $address = test_input($_POST["address"]);
+     // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+     if (!preg_match("/^[a-zA-Z ]*$/",$address)) {
+       $addressErr = "Invalid address"; 
+     }
+   }
+
+   if (empty($_POST["suburb"])) {
+     $suburb = "Suburb is required";
+   } else {
+     $suburb = test_input($_POST["suburb"]);
+     if (!preg_match("/^[a-zA-Z ]*$/",$suburb)) {
+       $suburbErr = "Invalid suburb"; 
+     }
+   }
+
+   if (empty($_POST["state"])) {
+     $state = "State is required";
+   } else {
+     $state = test_input($_POST["state"]);
+     if (!preg_match("/^[a-zA-Z ]*$/",$state)) {
+       $stateErr = "Invalid state"; 
+     }
+   }
+
+   if (empty($_POST["country"])) {
+     $country = "Country is required";
+   } else {
+     $country = test_input($_POST["country"]);
+     if (!preg_match("/^[a-zA-Z ]*$/",$country)) {
+       $countryErr = "Invalid country"; 
+     }
+   }
+
+if (empty($_POST["email"])) {
+     $emailErr = "Email is required";
+   } else {
+     $email = test_input($_POST["email"]);
+     // check if e-mail address is well-formed
+     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+       $emailErr = "Invalid email format"; 
+     }
+   }
+
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+?>
+
+<h1>Purchasing Form</h1>
+<form action="" method="post" > 
+   Name: <input type="text" name="name">
+   <span class="error">* <?php echo $nameErr;?></span>
+   <br><br>
+   Address: <input type="text" name="address">
+   <span class="error"><?php echo $address;?></span>
+   <br><br>
+   Suburb: <input type="text" name="suburb">
+   <span class="error"><?php echo $suburb;?></span>
+   <br><br>
+   State: <input type="text" name="state">
+   <span class="error"><?php echo $state;?></span>
+   <br><br>
+   Country: <input type="text" name="country">
+   <span class="error"><?php echo $country;?></span>
+   <br><br>
+   E-mail: <input type="text" name="email">
+   <span class="error">* <?php echo $emailErr;?></span>
+   <br><br>
+   <input type="submit" name="submit" value="Submit"> 
+</form>
+
+ <!--submit and following part does not work -->
+
+
+<?php
+echo $name $address $suburb $state $country $email;
+?>
+
+</body>
+</html>
