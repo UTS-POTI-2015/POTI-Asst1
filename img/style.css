@@ -12,17 +12,8 @@ body{
 }
 
 /*----for heading------*/
-h1.title{
-	font-family: Verdana, Times, serif;
-	position: relative;
-    left: 100px;
-    font-size: 32px;
-    color: #000000;
-}
-
 h1{
 	font-family: Verdana, Times, serif;
-	text-align:middle;
     font-size: 24px;
     color: #000000;
 }
@@ -66,35 +57,27 @@ input[type="text"]  {
 }
 
 input[type="submit"]  {
+	text-align:right;
 	width: 60px;
+	display: block;
     float: right;
-    text-align: middle;
 }
 
 /*-----------For table-----------*/
 table{
-	border: 0px;
+	border: 1px;
 	border-collapse: separate;
+
 }
 
 table th{
-	width: 150px;
-	padding: 5px;
+	padding: 5px 5px;
 	background-color: #bbcdde;
 	text-align: left;
 	font-size: 14px;
 
 }
-
 table td{
-	width: 150px;
-	padding: 5px;
-	font-size: 14px;
-}
-
-table td.button{
-	text-align: right;
-	width: 150px;
-	padding: 5px;
+	padding: 5px 5px;
 	font-size: 14px;
 }
