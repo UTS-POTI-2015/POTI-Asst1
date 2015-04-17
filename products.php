@@ -26,6 +26,9 @@
                 print "<tr>\n<th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>In Stock</th><th>Quantity to Purchase</th></tr>";
                 while ( $a_row = mysql_fetch_assoc($result) ) {
                      print "<input type='hidden' name='product_id' id='product_id' value=$product_id >";
+                     print "<input type='hidden' name='product_name' value=\"" . $a_row['product_name'] . "\">";
+                     print "<input type='hidden' name='unit_quantity' value=\"" . $a_row['unit_quantity'] . "\">";
+                     print "<input type='hidden' name='unit_price' value=" . $a_row['unit_price'] . ">";
                      print "<tr>\n";
                      print "<td>".$a_row['product_name']."</td>";
                      print "<td>".$a_row['unit_quantity']."</td>";
