@@ -37,7 +37,7 @@
                      print "<td class='button'>"."<input type='text' name='quantity_to_purchase' id='quantity_to_purchase' value=0>"."</td>";
                      print "</tr>";
                 }                
-                print "<tr><td colspan='5' class='button'><input type='submit' name='purchase_button' id='purchase_button' value='ADD'></tr>";
+                print "<tr><td colspan='5' class='button'><input type='submit' name='form_button' value='Add'></tr>";
                 print "</table>";
                 print "</form>";
             }
