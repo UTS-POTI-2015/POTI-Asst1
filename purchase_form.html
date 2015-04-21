@@ -1,115 +1,46 @@
-
-
-<form name="contactform" method="post" action="send_form_email.php">
- 
-<table width="450px">
- 
-<tr>
- 
- <td valign="top">
- 
-  <label for="name">FUll Name *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="name" maxlength="50" size="30">
- 
- </td>
- 
-</tr>
- 
-<tr>
- 
- <td valign="top">
- 
-  <label for="address">Address *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="address" maxlength="80" size="30">
- 
- </td>
- 
-</tr>
- 
-<tr>
- 
- <td valign="top">
- 
-  <label for="subur">Subur</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="subur" maxlength="30" size="30">
- 
- </td>
- 
-</tr>
-
-<tr>
- 
- <td valign="top">
- 
-  <label for="state">State *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="state" maxlength="30" size="30">
- 
- </td>
- 
-</tr>
- 
- <tr>
- 
- <td valign="top">
- 
-  <label for="country">Country</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  type="text" name="country" maxlength="30" size="30">
- 
- </td>
- 
-</tr>
-
-<tr>
- 
- <td valign="top">
- 
-  <label for="emial">Email *</label>
- 
- </td>
- 
- <td valign="top">
- 
-  <input  name="email" maxlength="30" size="30">
- 
- </td>
- 
-</tr>
- 
-<tr>
- 
- <td colspan="2" style="text-align:center">
- 
-  <input type="submit" value="Submit">
- 
- </td>
- 
-</tr>
- 
-</table>
- 
+<html>
+<head>
+<title>Purchase Confirmation Page</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Purchase Confirmation</h1>
+<p>Please fill in buyer's details for delivery.</p>
+<form name="delivery_form" method="post" action="sendEmail.php" 
+      onsubmit="return (areAllCompleted() && isEmailValid());">
+    <table>
+        <tr>
+            <td><label for="name">Full Name<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="name"></td>     
+        </tr>
+        <tr>
+            <td><label for="address">Address<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="address"></td>
+        </tr>
+        <tr>
+            <td><label for="subur">Suburb<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="suburb"></td>
+        </tr>
+        <tr>
+            <td><label for="state">State<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="state"></td>
+        </tr>
+        <tr>
+            <td><label for="country">Country<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="country"></td>
+        </tr>
+        <tr>
+            <td><label for="emial">Email<span class="redWord">*</span></label></td>
+            <td><input type="text" class="formText" name="email"></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+                <input type="submit" value="Submit">
+          </td>
+        </tr>      
+    </table>
 </form>
+
+<script type="text/javascript" src="checkform.js"></script>
+</body>
+</html>

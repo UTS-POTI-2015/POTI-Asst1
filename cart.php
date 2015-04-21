@@ -10,7 +10,7 @@
 		</div>
 
 		<div id="body">
-		<?
+		<?php
 			$form_button = $_REQUEST['form_button'];
 			switch ($form_button) {
 				case 'Add':
@@ -64,29 +64,31 @@
 
 		?>	
 
-		<form name="cart" action="cart.php">
-		<?php
-            print "<table>";
-            print "<tr>\n<th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>Quantity</th><th>Line Total</th></tr>";
-	 		$totalPrice = 0;
-		 	if(is_array($_SESSION['cart'])) {		 		
-				foreach ($_SESSION['cart'] as $item) {
-					print "<tr>\n";
-					foreach ($item as $key => $value) {
-						if ($key != 'product_id')
-				        	print "<td>".$value."</td>";
-				        if ($key == 'line_totle')				                
-				            $totalPrice += $value;       								 	
+			<form name="cart" action="purchase_form.html" target='top_right'>
+			<?php
+	            print "<table>";
+	            print "<tr>\n<th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>Quantity</th><th>Line Total</th></tr>";
+		 		$totalPrice = 0;
+			 	if(is_array($_SESSION['cart'])) {		 		
+					foreach ($_SESSION['cart'] as $item) {
+						print "<tr>\n";
+						foreach ($item as $key => $value) {
+							if ($key != 'product_id')
+					        	print "<td class='productForm'>".$value."</td>";
+					        if ($key == 'line_totle')				                
+					            $totalPrice += $value;       								 	
+						}
+					 	print "</tr>";
 					}
-				 	print "</tr>";
-				}
-	        }
-	        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".$totalPrice."</td></tr>";
-	        print "<tr><td colspan='4' class='button'><input type='submit' name = 'form_button' value='Checkout'></td>";
-	        print "<td class='button'><form action = 'cart.php' method='GET'> <input type ='submit' name = 'form_button' value = 'Clear' ></input></form></td></tr>";
-			//print "<td class='button'><input type='button' value='Clear' onclick='document.cart.reset();return false;''></tr>";	       
-            print "</table>";
-	    ?>
+					$_SESSION['totalPrice'] = $totalPrice;
+		        }
+		        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".$totalPrice."</td></tr>";
+		        print "<tr><td colspan='4' class='button'><input type='submit' name = 'form_button' value='Checkout'></td>";
+		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type ='submit' name = 'form_button' value = 'Clear' ></input></form></td></tr>";
+				//print "<td class='button'><input type='button' value='Clear' onclick='document.cart.reset();return false;''></tr>";	       
+	            print "</table>";
+		    ?>
+			</form>
 		</div>
 	</div>
 

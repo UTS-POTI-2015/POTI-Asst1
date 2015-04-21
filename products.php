@@ -30,10 +30,10 @@
                      print "<input type='hidden' name='unit_quantity' value=\"" . $a_row['unit_quantity'] . "\">";
                      print "<input type='hidden' name='unit_price' value=" . $a_row['unit_price'] . ">";
                      print "<tr>\n";
-                     print "<td>".$a_row['product_name']."</td>";
-                     print "<td>".$a_row['unit_quantity']."</td>";
-                     print "<td>$ ".$a_row['unit_price']."</td>";
-                     print "<td id='in_stock'>".$a_row['in_stock']."</td>";
+                     print "<td class='productForm'>".$a_row['product_name']."</td>";
+                     print "<td class='productForm'>".$a_row['unit_quantity']."</td>";
+                     print "<td class='productForm'>$ ".$a_row['unit_price']."</td>";
+                     print "<td class='productForm' id='in_stock'>".$a_row['in_stock']."</td>";
                      print "<td class='button'>"."<input type='text' name='quantity_to_purchase' id='quantity_to_purchase' value=0>"."</td>";
                      print "</tr>";
                 }                
