@@ -9,6 +9,7 @@
 			<h1>Shopping Cart</h1>
 		</div>
 	<div id="body">
+		<p>No item in the cart</p>
 		<table>
 			<tr>
 				<th>Product Name</th>
@@ -17,20 +18,8 @@
 				<th>Amount</th>
 				<th>Total Price</th>
 			</tr>
-			<tr>
-				<td colspan="5" align="right">Total Price for shopping: $</td>
-			</tr>
-			<tr>
-				<td>
-					<form action="cart.php">
-						<input type="submit" name="checkout" value="Checkout">
-					</form>
-				</td>
-				<td>
-					<form>
-						<input type="submit" name="clear" value="Clear">
-					</form>
-				</td>
+			<tr rowspan="2">
+				<td colspan="5" align="right" style="padding-top: 20px;">Total Price for shopping: $ 0.00</td>
 			</tr>
 		</table>
 

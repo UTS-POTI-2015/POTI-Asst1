@@ -73,10 +73,9 @@ a:active
 }
 
 #body{
-	background-color: #ffffff;
-	height: 2px;
+	background-color: #FDFFDF;
 	margin-bottom: 20px;
-	padding: 20px 20px 10px 20px;
+	padding: 0px 20px 10px 20px;
 }
 
 .redWord {
@@ -89,14 +88,27 @@ input[type="text"]  {
 	display: block;	 
 }
 
+input.submit {
+	float: right; 
+	padding-right: 50px; 
+	margin-right: 65px;
+	width:80
+}
+
 input.formText {
 	text-align:left;
 	width: 180px;
 	display: block;	 
 }
 
-input[type="submit"]  {
+input.leftButton {
 	width: 60px;
+    float: left;
+    text-align: middle;
+}
+
+input.checkout {
+	width: 80px;
     float: right;
     text-align: middle;
 }

@@ -11,10 +11,9 @@
 
 		<div id="body">
 		<?php
-			$form_button = $_REQUEST['form_button'];
-			switch ($form_button) {
+			$action = $_REQUEST['action'];
+			switch ($action) {
 				case 'Add':
-					print "In the switch case ADD"." <br>";
 					$product_id = $_REQUEST['product_id'];
 					$product_name = $_REQUEST['product_name'];
 					$unit_quantity = $_REQUEST['unit_quantity'];
@@ -37,34 +36,23 @@
 									  'line_totle' => $unit_price * $quantity_to_purchase);
 
 					array_push($_SESSION['cart'], $item_array);
-
 					break;
 				case 'Clear':
-					print "In the switch case CLEAR to delete session"." <br>";
 					session_start();
 					session_unset(); 
 					session_destroy();							
 					break;
-				case 'Checkout':
-					print "In the switch case CHECKOUT"." <br>";
-					//launch confirmation page to send an email
-					break;
 				default:
-					print "Non-defined button pressed!";
 					break;
 			}
 
-			
-			// echo "product_id is " . $product_id . "<br>";
-			// echo "product_name is " . $product_name . "<br>";
-			// echo "unit_quantity is " . $unit_quantity . "<br>";
-			// echo "unit_price is " . $unit_price . "<br>";
-			// echo "quantity_to_purchase is " . $quantity_to_purchase . "<br>";
-
+			if(is_null($_SESSION['cart'])) {
+				echo "<p>No item in the cart</p>";
+			}
 
 		?>	
 
-			<form name="cart" action="purchase_form.html" target='top_right'>
+		<form name="cart" action="purchase_form.html" target='top_right'>
 			<?php
 	            print "<table>";
 	            print "<tr>\n<th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>Quantity</th><th>Line Total</th></tr>";
@@ -80,15 +68,23 @@
 						}
 					 	print "</tr>";
 					}
+					$totalPrice = number_format($totalPrice, 2, '.', ',');
 					$_SESSION['totalPrice'] = $totalPrice;
 		        }
 		        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".$totalPrice."</td></tr>";
-		        print "<tr><td colspan='4' class='button'><input type='submit' name = 'form_button' value='Checkout'></td>";
-		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type ='submit' name = 'form_button' value = 'Clear' ></input></form></td></tr>";
-				//print "<td class='button'><input type='button' value='Clear' onclick='document.cart.reset();return false;''></tr>";	       
+		        print "<tr><td colspan='4' class='button'><input type='submit'  class='checkout' name='action' value='Checkout'></td>";
+	            $reloadURL = $_SERVER['PHP_SELF'] . "?action=Clear";
+		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type='button'  class='leftButton' name='action' value = 'Clear' onclick=\"window.open('$reloadURL','_self');\"></input></form></td></tr>";	       
 	            print "</table>";
+
+
+				echo "\$_SERVER['DOCUMENT_ROOT'] is " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
+				echo "\$_SERVER['SERVER_NAME'] is " . $_SERVER['SERVER_NAME'] . "<br>";
+				echo "\$_SERVER['SCRIPT_FILENAME'] is " . $_SERVER['SCRIPT_FILENAME'] . "<br>";
+				echo "\$_SERVER['PHP_SELF'] is " . $_SERVER['PHP_SELF'] . "<br>";
+				echo "\$reloadURL is " . $reloadURL . "<br>";
 		    ?>
-			</form>
+		</form>
 		</div>
 	</div>
 
