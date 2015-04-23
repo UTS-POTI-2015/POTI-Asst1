@@ -1,5 +1,17 @@
 <?php
 	session_start();
+
+	function getItemIndex($product_id) {
+		if (isset($_SESSION['cart']))
+			$size = sizeof($_SESSION['cart']);
+		if ($size > 0) {
+			for ($i = 0; $i < $size; ++$i) {
+				if ($_SESSION['cart'][$i]['product_id'] == $product_id)
+					return $i;
+			}
+		}
+		return -1;
+	}
 ?>
 <html>
 <head>
@@ -23,18 +35,25 @@
 					$unit_price = $_REQUEST['unit_price'];
 					$quantity_to_purchase = ltrim($_REQUEST['quantity_to_purchase'], '0');
 					
-					if(is_null($_SESSION['cart'])) {
+					if(!isset($_SESSION['cart'])) {
 						$_SESSION['cart']=array();
 					}
 
-					$item_array=array('product_id' => $product_id,
-									  'product_name' => $product_name,
-									  'unit_quantity' => $unit_quantity,
-									  'unit_price' => $unit_price,
-									  'quantity_to_purchase' => $quantity_to_purchase,
-									  'line_total' => $unit_price * $quantity_to_purchase);
+					$index = getItemIndex($product_id);
+					if ($index < 0) {
+						$item_array=array('product_id' => $product_id,
+										  'product_name' => $product_name,
+										  'unit_quantity' => $unit_quantity,
+										  'unit_price' => $unit_price,
+										  'quantity_to_purchase' => $quantity_to_purchase,
+										  'line_total' => $unit_price * $quantity_to_purchase);
 
-					array_push($_SESSION['cart'], $item_array);
+						array_push($_SESSION['cart'], $item_array);
+					}
+					else {
+						$_SESSION['cart'][$index]['quantity_to_purchase'] += $quantity_to_purchase;
+						$_SESSION['cart'][$index]['line_total'] += $unit_price * $quantity_to_purchase;
+					}
 					break;
 				case 'Clear':
 					session_unset(); 
@@ -44,17 +63,18 @@
 					break;
 			}
 
-			if(is_null($_SESSION['cart'])) {
+			if(!isset($_SESSION['cart'])) {
 				echo "<p>No item in the cart</p>";
 			}
 		?>	
 
-		<form name="cart" action="purchase_form.html" target='top_right'>
+		<form name="cart" action="purchase_form.php" target='top_right' onsubmit='return !isCartEmpty();'>
 			<?php
 	            print "<table>";
 	            print "<tr>\n<th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>Quantity</th><th>Line Total</th></tr>";
+	            print "<input type='hidden' name='cart_size' value=".sizeof($_SESSION['cart']).">";
 		 		$totalPrice = 0;
-			 	if(is_array($_SESSION['cart'])) {		 		
+			 	if(is_array($_SESSION['cart'])) {							 		
 					foreach ($_SESSION['cart'] as $item) {
 						print "<tr>\n";
 						foreach ($item as $key => $value) {
@@ -78,5 +98,16 @@
 		</form>
 		</div>
 	</div>
+
+<script type="text/javascript">
+function isCartEmpty(){
+	var cart_size = document.cart.cart_size.value;
+	if (parseFloat(cart_size) === 0) {
+	    alert("PLEASE ADD SOME ITEM IN THE CART!\n");
+	    return true;
+	};
+	return false;
+}
+</script>
 </body>
 </html>

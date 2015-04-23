@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $_SESSION['checkout'] = true;
+?>
 <html>
 <head>
 <title>Purchase Confirmation Page</title>
