@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <html>
 <head>
 	<title>Checkout Page</title>
@@ -19,10 +22,6 @@
 					$unit_quantity = $_REQUEST['unit_quantity'];
 					$unit_price = $_REQUEST['unit_price'];
 					$quantity_to_purchase = ltrim($_REQUEST['quantity_to_purchase'], '0');
-
-					session_start();
-					// print "Number of Items in the session = ".sizeof($_SESSION['cart'])." <br>";
-					// print "is_array(SESSION[cart]) is ".(string)is_array($_SESSION['cart'])." <br>";
 					
 					if(is_null($_SESSION['cart'])) {
 						$_SESSION['cart']=array();
@@ -33,12 +32,11 @@
 									  'unit_quantity' => $unit_quantity,
 									  'unit_price' => $unit_price,
 									  'quantity_to_purchase' => $quantity_to_purchase,
-									  'line_totle' => $unit_price * $quantity_to_purchase);
+									  'line_total' => $unit_price * $quantity_to_purchase);
 
 					array_push($_SESSION['cart'], $item_array);
 					break;
 				case 'Clear':
-					session_start();
 					session_unset(); 
 					session_destroy();							
 					break;
@@ -49,7 +47,6 @@
 			if(is_null($_SESSION['cart'])) {
 				echo "<p>No item in the cart</p>";
 			}
-
 		?>	
 
 		<form name="cart" action="purchase_form.html" target='top_right'>
@@ -61,32 +58,25 @@
 					foreach ($_SESSION['cart'] as $item) {
 						print "<tr>\n";
 						foreach ($item as $key => $value) {
-							if ($key != 'product_id')
+							if ($key != 'product_id' && $key != 'line_total')
 					        	print "<td class='productForm'>".$value."</td>";
-					        if ($key == 'line_totle')				                
-					            $totalPrice += $value;       								 	
+					        if ($key == 'line_total') {
+					        	print "<td class='productForm'>$ ".number_format($value,2,'.',',')."</td>";                
+					            $totalPrice += $value; 
+					        }      								 	
 						}
 					 	print "</tr>";
 					}
-					$totalPrice = number_format($totalPrice, 2, '.', ',');
 					$_SESSION['totalPrice'] = $totalPrice;
 		        }
-		        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".$totalPrice."</td></tr>";
+		        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".number_format($totalPrice, 2, '.', ',')."</td></tr>";
 		        print "<tr><td colspan='4' class='button'><input type='submit'  class='checkout' name='action' value='Checkout'></td>";
 	            $reloadURL = $_SERVER['PHP_SELF'] . "?action=Clear";
 		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type='button'  class='leftButton' name='action' value = 'Clear' onclick=\"window.open('$reloadURL','_self');\"></input></form></td></tr>";	       
 	            print "</table>";
-
-
-				echo "\$_SERVER['DOCUMENT_ROOT'] is " . $_SERVER['DOCUMENT_ROOT'] . "<br>";
-				echo "\$_SERVER['SERVER_NAME'] is " . $_SERVER['SERVER_NAME'] . "<br>";
-				echo "\$_SERVER['SCRIPT_FILENAME'] is " . $_SERVER['SCRIPT_FILENAME'] . "<br>";
-				echo "\$_SERVER['PHP_SELF'] is " . $_SERVER['PHP_SELF'] . "<br>";
-				echo "\$reloadURL is " . $reloadURL . "<br>";
 		    ?>
 		</form>
 		</div>
 	</div>
-
 </body>
 </html>
