@@ -78,12 +78,12 @@
 					foreach ($_SESSION['cart'] as $item) {
 						print "<tr>\n";
 						foreach ($item as $key => $value) {
-							if ($key != 'product_id' && $key != 'line_total')
+							if ($key != 'product_id' && $key != 'unit_price' && $key != 'line_total')
 					        	print "<td class='productForm'>".$value."</td>";
-					        if ($key == 'line_total') {
-					        	print "<td class='productForm'>$ ".number_format($value,2,'.',',')."</td>";                
-					            $totalPrice += $value; 
-					        }      								 	
+					        if ($key == 'unit_price' || $key == 'line_total') 
+					        	print "<td class='productForm'>$ ".number_format($value,2,'.',',')."</td>";      
+					        if ($key == 'line_total')					        	                
+					            $totalPrice += $value;					              								 	
 						}
 					 	print "</tr>";
 					}

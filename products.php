@@ -56,8 +56,9 @@
 <script type="text/javascript">
 function isQuantityValid(){
     var quantity = document.product.quantity_to_purchase.value;
-    var in_stock_node = document.getElementById("in_stock");
-    var in_stock = parseFloat(in_stock_node.textContent);
+    var orderLimit = 30;
+    // var in_stock_node = document.getElementById("in_stock");
+    // var in_stock = parseFloat(in_stock_node.textContent);
     if (quantity.length === 0) {
         alert("PLEASE ENTER SOME DATA IN QUANTITY FIELD!");
         return false;
@@ -68,8 +69,8 @@ function isQuantityValid(){
     };
 
     quantity = parseFloat(quantity);
-    if (quantity > in_stock) {
-        alert("PLEASE ENTER A POSITIVE NUMBER LESS THEN THE ONE IN STOCK IN QUANTITY FIELD!");
+    if (quantity > orderLimit) {
+        alert("PLEASE ENTER A POSITIVE NUMBER LESS THEN 30 IN QUANTITY FIELD!");
         return false;
     };
     return true;

@@ -1,8 +1,10 @@
 <?php
 session_start();
 
-$subject = "Hello! Purchase order from Online Grocery Store"; 
-$from = "From: noreply@onlinegrocerystore.com";
+$subject = "Purchase summary from Online Grocery Store"; 
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= "From: noreply@onlinegrocerystore.com";
 
 $name = $_POST['name']; // required
 $address = $_POST['address']; // required
@@ -11,50 +13,61 @@ $state = $_POST['state']; // required
 $country = $_POST['country']; // required
 $to = $_POST['email']; 
 
-//Build the email message
-$email_message = "PURCHASE SUMMARY\n\n";
-$email_message .= "Customer's details :\n";
-$email_message .= "Name: ".$name."\n";
-$email_message .= "Address: ".$address."\n";
-$email_message .= "Suburb: ".$suburb."\n";
-$email_message .= "State: ".$state."\n";
-$email_message .= "Country: ".$country."\n\n";
+$email_message = "<html><body>";
+$email_message .= "<h2>PURCHASE SUMMARY</h2>";
+$email_message .= "<h3>Customer's details :</h3>";
+$email_message .= "<ul><li>Name: ".$name."</li>";
+$email_message .= "<li>Address: ".$address."</li>";
+$email_message .= "<li>Suburb: ".$suburb."</li>";
+$email_message .= "<li>State: ".$state."</li>";
+$email_message .= "<li>Country: ".$country."</li>";
+$email_message .= "<li>Email: ".$to."</li></ul>";
 
-$email_message .= "Order's details : \n";
-$email_message .= str_pad('Product', 25);
-$email_message .= str_pad('Unit Qty', 20);
-$email_message .= str_pad('Ord. Qty & Price', 22);
-$email_message .= str_pad('Line Total', 15)."\n";
-$email_message .= "-------------------------------------------------------------------------------------"."\n";  
-if(is_array($_SESSION['cart'])) {	
+$email_message .= "<h3>Order's details : </h3>";
+$email_message .= "<table>";
+$email_message .= "<tr><th>Product Name</th><th>Unit Quantity</th><th>Unit Price</th><th>Quantity</th><th>Line Total</th></tr>";
+
+if(is_array($_SESSION['cart'])) {							 		
 	foreach ($_SESSION['cart'] as $item) {
-		$email_message .= str_pad($item['product_name'], 20);
-		$email_message .= str_pad($item['unit_quantity'], 20);
-		$email_message .= str_pad($item['quantity_to_purchase'].'@$'.number_format($item['unit_price'],2,'.',','), 20);
-		$email_message .= str_pad('$'.number_format($item['line_total'],2,'.',','), 15)."\n"; 
-	}
+		$email_message .= "<tr>";
+		foreach ($item as $key => $value) {
+			if ($key != 'product_id' && $key != 'unit_price' && $key != 'line_total')
+	        	$email_message .= "<td>".$value."</td>";
+	        if ($key == 'unit_price' || $key == 'line_total') {
+	        	$email_message .=  "<td>$ ".number_format($value,2,'.',',')."</td>";                
+	        }      								 	
+		}
+	 	print "</tr>";
+		}
+	$email_message .= "<tr><td colspan='5' align='right'>Total Price : $ ".number_format($_SESSION['totalPrice'], 2, '.', ',')."</td></tr>";
 }
 
-$email_message .= "\nAmount Payable: $".number_format($_SESSION['totalPrice'],2,'.',',')."\n";
-date_default_timezone_set('Australia/Sydney');
-$email_message .= "Order Date: ".date('h:i A, D, d-M-Y',time())."\n\n";
+$email_message .= "</table><br>";
+$email_message .="<p>Thank you for shopping at the Online Grocery Store.</p>";
+$email_message .="<p>Please make your payment to process the order further.</p>";
 
-$email_message .= "Thank you for shopping at the Online Grocery Store.\n";
-$email_message .= "Please make your payment to process the order further.";
+date_default_timezone_set('Australia/Sydney');
+$email_message .="<p>"."Order Time: ".date('h:i A, D, d-M-Y',time())."</p>";
+$email_message .= "<br></body></html>";
 
 //Send the email
-$emailSent = mail($to, $subject, $email_message, $from);
+$emailSent = mail($to, $subject, $email_message, $headers);
 $reloadURL =  "products.html";
-$jsCmdonSent = "alert('Email has been sent successfully.');"."window.open('products.html','_self');".
-				"window.open('menu.html','left');". "window.open('cart.html','bottom_right');";
-$jsCmdonFail = "alert('Email has not been sent yet! Please refill the form.');"."window.open('/purchase_form.html','_self');";
+
+$jsCmdOnSent = "alert('Email has been sent successfully.');";
+$jsCmdOnSent .= "window.open('menu.html','left');";
+$jsCmdOnSent .= "window.open('products.html','_self');";
+$jsCmdOnSent .= "window.open('cart.php','bottom_right');";
+
+$jsCmdOnFail = "alert('Email has not been sent yet! Please refill the form.');";
+$jsCmdOnFail .= "window.open('/purchase_form.php','_self');";
 
 if ($emailSent) {
-	echo "<body bgcolor='#FDFFDF' onload=\"".$jsCmdonSent."\"></body>";
+	echo "<body bgcolor='#FDFFDF' onload=\"".$jsCmdOnSent."\"></body>";
 	session_unset(); 
 	session_destroy();	
 }
 else {
-	echo "<body onload=\"".$jsCmdonFail."\"></body>";	
+	echo "<body bgcolor='#FDFFDF' onload=\"".$jsCmdOnFail."\"></body>";	
 }
 ?>
