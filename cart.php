@@ -90,9 +90,10 @@
 					$_SESSION['totalPrice'] = $totalPrice;
 		        }
 		        print "<tr><td colspan='5' class='button'>Total Price for shopping: $ ".number_format($totalPrice, 2, '.', ',')."</td></tr>";
-		        print "<tr><td colspan='4' class='button'><input type='submit'  class='checkout' name='action' value='Checkout'></td>";
-	            $reloadURL = $_SERVER['PHP_SELF'] . "?action=Clear";
-		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type='button'  class='leftButton' name='action' value = 'Clear' onclick=\"window.open('$reloadURL','_self');\"></input></form></td></tr>";	       
+		        //$checkoutReloadURL = "frozen_menu.html";
+		        print "<tr><td colspan='4' class='button'><input type='submit' class='checkout' name='action' value='Checkout'></td>";
+	            $clearReloadURL = $_SERVER['PHP_SELF'] . "?action=Clear";
+		        print "<td class='button'><form action = 'cart.php' method='GET'> <input type='button'  class='leftButton' name='action' value = 'Clear' onclick=\"window.open('$clearReloadURL','_self');\"></input></form></td></tr>";	       
 	            print "</table>";
 		    ?>
 		</form>

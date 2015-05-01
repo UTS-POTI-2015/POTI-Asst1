@@ -41,12 +41,15 @@
                         print "<td class='productForm'>"."No more items to be added when checkout."."</td>"."</tr>";
                     }
                     else {
-                        print "<td class='button'>"."<input type='text' name='quantity_to_purchase' value=0>"."</td>"."</tr>";                                                    
+                        print "<td class='button'>"."<input type='text' name='quantity_to_purchase' value=0>"."</td>"."</tr>";
                         print "<tr><td colspan='4' class='button'></td><td style='padding-left: 65px;'><input type='submit' class='leftButton' name='action' value='Add'></td></tr>";
-                    }        
+                    }
                 }
                 print "</table>";
                 print "</form>";
+                if(isset($_SESSION['checkout'])) {
+                        print "<p class='warning'>NOTE: Please click checkout button on the shopping cart page to back bring purchase confirmation page.</p>";
+                }
             }
             mysql_close($link);
             ?>
@@ -63,12 +66,13 @@ function isQuantityValid(){
         alert("PLEASE ENTER SOME DATA IN QUANTITY FIELD!");
         return false;
     };
-    if (isNaN(quantity) || parseFloat(quantity) <= 0) {
-        alert("PLEASE ENTER A POSITIVE NUMBER IN QUANTITY FIELD!");
+
+    quantity = parseFloat(quantity);
+    if (isNaN(quantity) || quantity <= 0 || quantity % 1 !== 0) {
+        alert("PLEASE ENTER A POSITIVE WHOLE NUMBER IN QUANTITY FIELD!");
         return false;
     };
 
-    quantity = parseFloat(quantity);
     if (quantity > orderLimit) {
         alert("PLEASE ENTER A POSITIVE NUMBER LESS THEN 30 IN QUANTITY FIELD!");
         return false;

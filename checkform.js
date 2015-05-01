@@ -1,4 +1,5 @@
 function areAllCompleted() {
+    'use strict';
     var name = document.delivery_form.name.value;
     var address = document.delivery_form.address.value;
     var suburb = document.delivery_form.suburb.value;
@@ -23,14 +24,15 @@ function areAllCompleted() {
     if (errorMsg.length > 0) {
         alert(errorMsg);
         return false;
-    };
+    }
 
     return true;
 }
 
 function isEmailValid() {
+    'use strict';
     var email = document.delivery_form.email.value;
-    var patt = /^[a-zA-Z0-9\._-]+@[a-zA-Z-\.]+\.(com|net|org|gov|edu)(\.(au|us|hk\cn))?$/;
+    var patt = /^[a-zA-Z0-9\._\-]+@[a-zA-Z-\.]+\.(com|net|org|gov|edu)(\.(au|us|hk\cn))?$/;
     if (!patt.test(email)) {
         alert("Email address is not Valid!");
         return false;

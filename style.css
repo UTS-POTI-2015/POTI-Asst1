@@ -12,6 +12,14 @@ body{
 	background-repeat: repeat;
 }
 
+p.warning {
+	font-family: Verdana, Times, serif;
+	width: 500px;
+    color: #000000;	
+    word-wrap: break-word
+}
+
+
 /*----for heading------*/
 h1.title{
 	font-family: Verdana, Times, serif;
@@ -26,6 +34,14 @@ h1{
 	text-align:middle;
     font-size: 24px;
     color: #000000;
+}
+
+h2.frozen {
+	font-family: Verdana, Times, serif;
+	position: relative;
+    left: 100px;
+    font-size: 26px;
+    color: #000000;	
 }
 
 /*----for map link------*/
